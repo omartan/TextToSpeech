@@ -13,6 +13,7 @@
 		751DA9DD248FC9F20097F702 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751DA9DB248FC9F20097F702 /* Main.storyboard */; };
 		751DA9DF248FC9F30097F702 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 751DA9DE248FC9F30097F702 /* Assets.xcassets */; };
 		751DA9E2248FC9F30097F702 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751DA9E0248FC9F30097F702 /* LaunchScreen.storyboard */; };
+		75EEA68224910F7800A4628D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EEA68124910F7800A4628D /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		751DA9DE248FC9F30097F702 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		751DA9E1248FC9F30097F702 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		751DA9E3248FC9F30097F702 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75EEA68124910F7800A4628D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 			children = (
 				751DA9D4248FC9F20097F702 /* TextToSpeech */,
 				751DA9D3248FC9F20097F702 /* Products */,
+				75EEA6832491140A00A4628D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,12 +62,20 @@
 				751DA9D5248FC9F20097F702 /* AppDelegate.swift */,
 				751DA9D7248FC9F20097F702 /* SceneDelegate.swift */,
 				751DA9D9248FC9F20097F702 /* ViewController.swift */,
+				75EEA68124910F7800A4628D /* SettingsView.swift */,
 				751DA9DB248FC9F20097F702 /* Main.storyboard */,
 				751DA9DE248FC9F30097F702 /* Assets.xcassets */,
 				751DA9E0248FC9F30097F702 /* LaunchScreen.storyboard */,
 				751DA9E3248FC9F30097F702 /* Info.plist */,
 			);
 			path = TextToSpeech;
+			sourceTree = "<group>";
+		};
+		75EEA6832491140A00A4628D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +94,8 @@
 			dependencies = (
 			);
 			name = TextToSpeech;
+			packageProductDependencies = (
+			);
 			productName = TextToSpeech;
 			productReference = 751DA9D2248FC9F20097F702 /* TextToSpeech.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +124,8 @@
 				Base,
 			);
 			mainGroup = 751DA9C9248FC9F20097F702;
+			packageReferences = (
+			);
 			productRefGroup = 751DA9D3248FC9F20097F702 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				751DA9DA248FC9F20097F702 /* ViewController.swift in Sources */,
+				75EEA68224910F7800A4628D /* SettingsView.swift in Sources */,
 				751DA9D6248FC9F20097F702 /* AppDelegate.swift in Sources */,
 				751DA9D8248FC9F20097F702 /* SceneDelegate.swift in Sources */,
 			);
