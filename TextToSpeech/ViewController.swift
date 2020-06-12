@@ -7,19 +7,57 @@
 //
 
 import UIKit
+import AVFoundation
+import Foundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var speakButton: UIButton!
+    @IBOutlet weak var texts: UITextView!
+    
+    let speechSynthesizer = AVSpeechSynthesizer()
+    var rate: Float!
+    var pitch: Float!
+    var volume: Float!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         speakButton.layer.cornerRadius = 10
         speakButton.layer.cornerCurve = .continuous
         
-        
+        if !loadSettings() {
+            registerDefaultSettings()
+        }
     }
+    
+    func registerDefaultSettings() {
+        rate = AVSpeechUtteranceDefaultSpeechRate
+        pitch = 1.0
+        volume = 1.0
+        
+        let defaultSpeechSettings = ["rate": rate, "pitch": pitch, "volume": volume]
+        UserDefaults.standard.register(defaults: defaultSpeechSettings as [String : Any])
+    }
+    
+    func loadSettings() -> Bool {
+        let userDefaults = UserDefaults.standard
+        
+        if let theRate: Float = userDefaults.value(forKey: "rate") as? Float {
+            rate = theRate
+            pitch = userDefaults.value(forKey: "pitch") as? Float
+            volume = userDefaults.value(forKey: "volume") as? Float
+            return true
+        }
+        return false
+    }
+    
     @IBAction func speak(_ sender: UIButton) {
-        print("Speak!")
+        let speechUtterence = AVSpeechUtterance(string: texts.text)
+        speechUtterence.rate = rate // 0.0 - 1.0
+        speechUtterence.pitchMultiplier = pitch // 0.5 - 2.0 (Default: 1.0)
+        speechUtterence.volume = volume // 0.0 - 1.0 (Default: 1.0)
+        
+        speechSynthesizer.speak(speechUtterence)
     }
 }
 

@@ -71,6 +71,7 @@
                     <navigationItem key="navigationItem" id="Ybt-Qs-4TE"/>
                     <connections>
                         <outlet property="speakButton" destination="xDX-GW-SKE" id="fsW-Se-JTd"/>
+                        <outlet property="texts" destination="TSr-WE-pnf" id="xwr-7X-bTx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
