@@ -13,7 +13,8 @@ class SettingsView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     @IBOutlet var pickerView: UIPickerView!
     
     var voicesArray: [String] = []
-    let speechVoices = AVSpeechSynthesisVoice.speechVoices()
+    let speechVoices = AVSpeechSynthesisVoice.speechVoices().sorted(by: {    Locale.current.localizedString(forLanguageCode: $0.language)! < Locale.current.localizedString(forLanguageCode: $1.language)!
+})
 
     override func viewDidLoad() {
         super.viewDidLoad()
