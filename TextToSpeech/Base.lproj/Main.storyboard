@@ -39,6 +39,40 @@
                                     <segue destination="bl6-SR-ZD9" kind="show" id="4uV-eq-kdk"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="h81-rP-zLF">
+                                <rect key="frame" x="20" y="812" width="374" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0A-6e-fj5">
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="50"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.4039215686" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="39N-e1-IUG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Pause"/>
+                                        <connections>
+                                            <action selector="pauseSpeech:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mna-81-leV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Heh-g0-xmb">
+                                        <rect key="frame" x="192" y="0.0" width="182" height="50"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.4039215686" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="zFB-Ho-TWA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Stop"/>
+                                        <connections>
+                                            <action selector="stopSpeech:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MRV-ue-Kwa"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7mb-d2-Khh"/>
+                                </constraints>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDX-GW-SKE">
                                 <rect key="frame" x="20" y="812" width="374" height="50"/>
                                 <color key="backgroundColor" red="0.95686274509803915" green="0.40392156862745099" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,7 +91,10 @@
                         <constraints>
                             <constraint firstItem="xDX-GW-SKE" firstAttribute="top" secondItem="TSr-WE-pnf" secondAttribute="bottom" constant="20" id="5M0-MH-SKL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TSr-WE-pnf" secondAttribute="trailing" constant="20" id="9Q1-8o-YqC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h81-rP-zLF" secondAttribute="trailing" constant="20" id="AHy-KL-hL2"/>
                             <constraint firstItem="m56-f1-bNG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Ehq-pr-e6Q"/>
+                            <constraint firstItem="h81-rP-zLF" firstAttribute="top" secondItem="TSr-WE-pnf" secondAttribute="bottom" constant="20" id="Ff0-0X-Ojp"/>
+                            <constraint firstItem="h81-rP-zLF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="MwK-Ji-4cx"/>
                             <constraint firstItem="xDX-GW-SKE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="NJi-Dy-t4s"/>
                             <constraint firstItem="TSr-WE-pnf" firstAttribute="top" secondItem="m56-f1-bNG" secondAttribute="bottom" constant="20" id="QMG-tm-dBV"/>
                             <constraint firstItem="m56-f1-bNG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="Qix-s2-q4F"/>
@@ -70,8 +107,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ybt-Qs-4TE"/>
                     <connections>
+                        <outlet property="pauseButton" destination="a0A-6e-fj5" id="KKN-Qn-gT0"/>
                         <outlet property="speakButton" destination="xDX-GW-SKE" id="fsW-Se-JTd"/>
-                        <outlet property="texts" destination="TSr-WE-pnf" id="xwr-7X-bTx"/>
+                        <outlet property="stopButton" destination="Heh-g0-xmb" id="qyJ-pz-dwm"/>
+                        <outlet property="texts" destination="TSr-WE-pnf" id="K7u-jL-cHF"/>
+                        <outletCollection property="actionButtons" destination="xDX-GW-SKE" collectionClass="NSMutableArray" id="CyS-X1-pej"/>
+                        <outletCollection property="actionButtons" destination="a0A-6e-fj5" collectionClass="NSMutableArray" id="r2h-dn-m2N"/>
+                        <outletCollection property="actionButtons" destination="Heh-g0-xmb" collectionClass="NSMutableArray" id="e1X-Ol-hHz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

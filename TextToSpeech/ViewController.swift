@@ -12,7 +12,10 @@ import Foundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var speakButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var texts: UITextView!
+    @IBOutlet var actionButtons: [UIButton]!
     
     let speechSynthesizer = AVSpeechSynthesizer()
     var rate: Float!
@@ -22,12 +25,32 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        speakButton.layer.cornerRadius = 10
-        speakButton.layer.cornerCurve = .continuous
         
+        for button in actionButtons {
+            button.layer.cornerRadius = 10
+            button.layer.cornerCurve = .continuous
+        }
+
         if !loadSettings() {
             registerDefaultSettings()
         }
+    }
+    
+    func animateActionButtonAppearance(_ shouldHideSpeakButton: Bool) {
+        var speakButtonAlphaValue: CGFloat = 1.0
+        var pauseStopButtonsAlphaValue: CGFloat = 0.0
+        
+        if shouldHideSpeakButton {
+            speakButtonAlphaValue = 0.0
+            pauseStopButtonsAlphaValue = 1.0
+        }
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            () -> Void in
+            self.speakButton.alpha = speakButtonAlphaValue
+            self.pauseButton.alpha = pauseStopButtonsAlphaValue
+            self.stopButton.alpha = pauseStopButtonsAlphaValue
+        })
     }
     
     func registerDefaultSettings() {
@@ -52,12 +75,29 @@ class ViewController: UIViewController {
     }
     
     @IBAction func speak(_ sender: UIButton) {
-        let speechUtterence = AVSpeechUtterance(string: texts.text)
-        speechUtterence.rate = rate // 0.0 - 1.0
-        speechUtterence.pitchMultiplier = pitch // 0.5 - 2.0 (Default: 1.0)
-        speechUtterence.volume = volume // 0.0 - 1.0 (Default: 1.0)
-        
-        speechSynthesizer.speak(speechUtterence)
+        if !speechSynthesizer.isSpeaking {
+            let speechUtterence = AVSpeechUtterance(string: texts.text)
+            speechUtterence.rate = rate // 0.0 - 1.0
+            speechUtterence.pitchMultiplier = pitch // 0.5 - 2.0 (Default: 1.0)
+            speechUtterence.volume = volume // 0.0 - 1.0 (Default: 1.0)
+            
+            speechSynthesizer.speak(speechUtterence)
+        } else {
+            speechSynthesizer.continueSpeaking()
+        }
+        animateActionButtonAppearance(true)
+    }
+    
+    @IBAction func pauseSpeech(_ sender: UIButton) {
+        speechSynthesizer.pauseSpeaking(at: .word)
+
+        animateActionButtonAppearance(false)
+    }
+    
+    @IBAction func stopSpeech(_ sender: UIButton) {
+        speechSynthesizer.stopSpeaking(at: .immediate)
+
+        animateActionButtonAppearance(false)
     }
 }
 
