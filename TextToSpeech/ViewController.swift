@@ -34,6 +34,8 @@ class ViewController: UIViewController {
         if !loadSettings() {
             registerDefaultSettings()
         }
+        
+        texts.addDoneButtonOnKeyboard()
     }
     
     func animateActionButtonAppearance(_ shouldHideSpeakButton: Bool) {
@@ -82,22 +84,31 @@ class ViewController: UIViewController {
             speechUtterence.volume = volume // 0.0 - 1.0 (Default: 1.0)
             
             speechSynthesizer.speak(speechUtterence)
+//            texts.isUserInteractionEnabled = false
         } else {
+            // Continue speaking after pause
             speechSynthesizer.continueSpeaking()
+//            texts.isUserInteractionEnabled = false
         }
         animateActionButtonAppearance(true)
+        texts.isUserInteractionEnabled = false
+
     }
     
     @IBAction func pauseSpeech(_ sender: UIButton) {
         speechSynthesizer.pauseSpeaking(at: .word)
 
         animateActionButtonAppearance(false)
+        texts.isUserInteractionEnabled = true
+
     }
     
     @IBAction func stopSpeech(_ sender: UIButton) {
         speechSynthesizer.stopSpeaking(at: .immediate)
 
         animateActionButtonAppearance(false)
+        texts.isUserInteractionEnabled = true
+
     }
 }
 
@@ -118,7 +129,8 @@ extension UITextView{
       {
           let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
           doneToolbar.barStyle = .default
-
+          doneToolbar.tintColor = UIColor.init(red: 0.96, green: 0.40, blue: 0.26, alpha: 1.00)
+            
           let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
           let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
 
