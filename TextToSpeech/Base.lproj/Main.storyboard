@@ -284,6 +284,9 @@
                         <viewLayoutGuide key="safeArea" id="jRl-wa-rJs"/>
                     </view>
                     <navigationItem key="navigationItem" id="FgC-yQ-Ozf"/>
+                    <connections>
+                        <outlet property="pickerView" destination="EKB-7G-rkG" id="JNd-pl-jqR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mnQ-UG-Lc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
