@@ -78,12 +78,19 @@ class ViewController: UIViewController {
     
     @IBAction func speak(_ sender: UIButton) {
         if !speechSynthesizer.isSpeaking {
-            let speechUtterence = AVSpeechUtterance(string: texts.text)
-            speechUtterence.rate = rate // 0.0 - 1.0
-            speechUtterence.pitchMultiplier = pitch // 0.5 - 2.0 (Default: 1.0)
-            speechUtterence.volume = volume // 0.0 - 1.0 (Default: 1.0)
+            let textParagraphs = texts.text.components(separatedBy: "\n")
             
-            speechSynthesizer.speak(speechUtterence)
+            for pieceOfText in textParagraphs {
+                let speechUtterence = AVSpeechUtterance(string: pieceOfText)
+                speechUtterence.rate = rate // 0.0 - 1.0
+                speechUtterence.pitchMultiplier = pitch // 0.5 - 2.0 (Default: 1.0)
+                speechUtterence.volume = volume // 0.0 - 1.0 (Default: 1.0)
+                speechUtterence.postUtteranceDelay = 3
+//                speechUtterence.preUtteranceDelay = 1
+                
+                speechSynthesizer.speak(speechUtterence)
+            }
+            
 //            texts.isUserInteractionEnabled = false
         } else {
             // Continue speaking after pause
