@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Foundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     @IBOutlet weak var speakButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
@@ -21,6 +21,11 @@ class ViewController: UIViewController {
     var rate: Float!
     var pitch: Float!
     var volume: Float!
+    
+    var totalUtterances: Int! = 0
+    var currentUtterance: Int! = 0
+    var totalTextLength: Int = 0
+    var spokenTextLengths: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +41,28 @@ class ViewController: UIViewController {
         }
         
         texts.addDoneButtonOnKeyboard()
+        
+        speechSynthesizer.delegate = self
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        
+//            spokenTextLengths = spokenTextLengths + utterance.speechString.utf16.count
+                
+                let progress: Float = Float(spokenTextLengths * 100 / totalTextLength)
+        //        pvSpeechProgress.progress = progress / 100  // need to create UI for this
+                
+                if currentUtterance == totalUtterances {
+                    animateActionButtonAppearance(false)
+                }
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        currentUtterance = currentUtterance + 1
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        spokenTextLengths = spokenTextLengths + utterance.speechString.utf16.count
     }
     
     func animateActionButtonAppearance(_ shouldHideSpeakButton: Bool) {
@@ -80,6 +107,11 @@ class ViewController: UIViewController {
         if !speechSynthesizer.isSpeaking {
             let textParagraphs = texts.text.components(separatedBy: "\n")
             
+            totalUtterances = textParagraphs.count
+            currentUtterance = 0
+            totalTextLength = 0
+            spokenTextLengths = 0
+            
             for pieceOfText in textParagraphs {
                 let speechUtterence = AVSpeechUtterance(string: pieceOfText)
                 speechUtterence.rate = rate // 0.0 - 1.0
@@ -87,6 +119,8 @@ class ViewController: UIViewController {
                 speechUtterence.volume = volume // 0.0 - 1.0 (Default: 1.0)
                 speechUtterence.postUtteranceDelay = 3
 //                speechUtterence.preUtteranceDelay = 1
+                
+                totalTextLength = totalTextLength + pieceOfText.utf16.count
                 
                 speechSynthesizer.speak(speechUtterence)
             }
